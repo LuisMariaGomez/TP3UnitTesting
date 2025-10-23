@@ -18,7 +18,7 @@ namespace CDatos.Data
         public DbSet<Zombie> Zombie { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-83HBC25;Initial Catalog=ZombieDB;Integrated Security=True;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-SMHBKIH\\SQLEXPRESS;Initial Catalog=ZombieDB;Integrated Security=True;TrustServerCertificate=true;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

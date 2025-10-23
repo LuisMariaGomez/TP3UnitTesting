@@ -57,21 +57,6 @@ namespace TP3UnitTesting.Controllers
 
             await _IZombieLogica.ActualizarZombie(zombie);
 
-            //try
-            //{
-            //}
-            //catch ()
-            //{
-            //    if (!ZombieExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-
             return NoContent();
         }
 

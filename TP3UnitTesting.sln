@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36429.23 d17.14
+VisualStudioVersion = 17.14.36429.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP3UnitTesting", "TP3UnitTesting\TP3UnitTesting.csproj", "{4B3FA548-53C2-4CEC-9A66-740C173EF22F}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{2BED47A5-CEC5-4CEB-80AA-A4A01DDE4C07}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "MVC\MVC.csproj", "{71C2D3E1-C580-4C08-9FC3-C982A25CE173}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebasUnitarias", "PruebasUnitarias\PruebasUnitarias.csproj", "{7FE38CAD-E138-4317-B943-FDBCA87AA438}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{71C2D3E1-C580-4C08-9FC3-C982A25CE173}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71C2D3E1-C580-4C08-9FC3-C982A25CE173}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71C2D3E1-C580-4C08-9FC3-C982A25CE173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FE38CAD-E138-4317-B943-FDBCA87AA438}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FE38CAD-E138-4317-B943-FDBCA87AA438}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FE38CAD-E138-4317-B943-FDBCA87AA438}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FE38CAD-E138-4317-B943-FDBCA87AA438}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
