@@ -1,16 +1,17 @@
-﻿using System;
+﻿using CDatos.Repositorio;
+using CDatos.Repositorio.IRepositorio;
+using CNegocio.Logica.ILogica;
+using Shared.DTOs;
+using Shared.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CDatos.Repositorio;
-using CDatos.Repositorio.IRepositorio;
-using Shared.DTOs;
-using Shared.Entities;
 
 namespace CNegocio.Logica
 {
-    public class ZombieLogica
+    public class ZombieLogica : IZombieLogica
     {
         private readonly IZombieRepositorio _zombieRepositorio;
         public ZombieLogica(IZombieRepositorio zombieRepositorio)
@@ -71,6 +72,7 @@ namespace CNegocio.Logica
         {
             var zombie = new Zombie
             {
+                Id = z.Id,
                 Nombre = z.Nombre,
                 Edad = z.Edad,
                 NivelPeligro = z.NivelPeligro,

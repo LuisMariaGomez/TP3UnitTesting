@@ -36,7 +36,7 @@ namespace CDatos.Repositorio
             var zombieExistente = _context.Zombie.Find(zombie.Id);
             if (zombieExistente == null)
             {
-                throw new Exception("Categoría no encontrada.");
+                throw new Exception("Zombie no encontrada.");
             }
             zombieExistente.Nombre = zombie.Nombre;
             zombieExistente.NivelPeligro = zombie.NivelPeligro;
@@ -51,7 +51,7 @@ namespace CDatos.Repositorio
             var zombieExistente = _context.Zombie.Find(id);
             if (zombieExistente == null)
             {
-                throw new Exception("Categoría no encontrada.");
+                throw new Exception("Zombie no encontrada.");
             }
             zombieExistente.Estado = "Eliminado";
 

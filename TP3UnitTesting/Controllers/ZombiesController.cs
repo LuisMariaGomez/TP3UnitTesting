@@ -80,7 +80,7 @@ namespace TP3UnitTesting.Controllers
         [HttpPost]
         public async Task<ActionResult<Zombie>> PostZombie(ZombieDTO zombie)
         {
-            _IZombieLogica.CrearZombie(zombie);
+            await _IZombieLogica.CrearZombie(zombie);
 
             return CreatedAtAction("GetZombie", new { id = zombie.Id }, zombie);
         }
@@ -95,7 +95,7 @@ namespace TP3UnitTesting.Controllers
                 return NotFound();
             }
 
-            _IZombieLogica.EliminarZombie(zombie.Id);
+            await _IZombieLogica.EliminarZombie(zombie.Id);
 
             return NoContent();
         }

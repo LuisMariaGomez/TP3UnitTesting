@@ -1,0 +1,25 @@
+@model MVC.Models.DTOs.ZombieDTO
+@{
+    ViewData["Title"] = "Detalles del Zombie";
+}
+<h2>Detalles del Zombie</h2>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Nombre</dt>
+        <dd class="col-sm-10">@Model.Nombre</dd>
+        <dt class="col-sm-2">Edad</dt>
+        <dd class="col-sm-10">@Model.Edad</dd>
+        <dt class="col-sm-2">Nivel Peligro</dt>
+        <dd class="col-sm-10">@Model.NivelPeligro</dd>
+        <dt class="col-sm-2">Tipo</dt>
+        <dd class="col-sm-10">@Model.Tipo</dd>
+        <dt class="col-sm-2">Velocidad</dt>
+        <dd class="col-sm-10">@Model.Velocidad</dd>
+        <dt class="col-sm-2">Fecha Infección</dt>
+        <dd class="col-sm-10">@Model.FechaInfeccion.ToShortDateString()</dd>
+        <dt class="col-sm-2">Estado</dt>
+        <dd class="col-sm-10">@Model.Estado</dd>
+    </dl>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</div>

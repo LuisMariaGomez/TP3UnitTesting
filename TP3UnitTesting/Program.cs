@@ -1,11 +1,21 @@
 ﻿using CDatos.Data;
+using CDatos.Repositorio;
+using CDatos.Repositorio.IRepositorio;
+using CNegocio.Logica;
+using CNegocio.Logica.ILogica;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuración de EF Core (ejemplo con InMemory para pruebas)
+// In the Program.cs file, add the following line to configure the HttpClient service
+builder.Services.AddHttpClient();
+
+builder.Services.AddScoped<IZombieLogica, ZombieLogica>();
+builder.Services.AddScoped<IZombieRepositorio, ZombieRepositorio>();
+
 builder.Services.AddDbContext<DataContext>(opt =>
-    opt.UseInMemoryDatabase("ZombiesDB"));
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
+
 
 // Servicios API
 builder.Services.AddControllers();
