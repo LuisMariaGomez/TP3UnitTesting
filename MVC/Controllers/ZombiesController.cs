@@ -15,10 +15,19 @@ namespace MVC.Controllers
             _httpClient = httpClientFactory.CreateClient();
         }
 
-        // Listar todos los zombies
-        public async Task<IActionResult> Index()
+        // Listar zombies (por defecto oculta los eliminados). Pasar ?showAll=true para mostrar todos.
+        public async Task<IActionResult> Index(bool showAll = false)
         {
-            var zombies = await _httpClient.GetFromJsonAsync<List<ZombieDTO>>(_apiUrl);
+            var zombies = await _httpClient.GetFromJsonAsync<List<ZombieDTO>>(_apiUrl) ?? new List<ZombieDTO>();
+
+            if (!showAll)
+            {
+                zombies = zombies
+                    .Where(z => !string.Equals(z.Estado, "Eliminado", StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            ViewData["ShowAll"] = showAll;
             return View(zombies);
         }
 
@@ -67,21 +76,32 @@ namespace MVC.Controllers
             return View(zombie);
         }
 
-        // Confirmar eliminación
-        public async Task<IActionResult> Delete(int id)
-        {
-            var zombie = await _httpClient.GetFromJsonAsync<ZombieDTO>($"{_apiUrl}/{id}");
-            if (zombie == null) return NotFound();
-            return View(zombie);
-        }
-
+        // Confirmar "eliminación" -> marcamos Estado = "Eliminado" y hacemos PUT
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var response = await _httpClient.DeleteAsync($"{_apiUrl}/{id}");
+            var zombie = await _httpClient.GetFromJsonAsync<ZombieDTO>($"{_apiUrl}/{id}");
+            if (zombie == null) return NotFound();
+
+            zombie.Estado = "Eliminado";
+            await _httpClient.PutAsJsonAsync($"{_apiUrl}/{id}", zombie);
+
             return RedirectToAction(nameof(Index));
         }
 
+        // Reanimar (cambiar Estado = "Vivo") usando PUT
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Revive(int id)
+        {
+            var zombie = await _httpClient.GetFromJsonAsync<ZombieDTO>($"{_apiUrl}/{id}");
+            if (zombie == null) return NotFound();
+
+            zombie.Estado = "Vivo";
+            await _httpClient.PutAsJsonAsync($"{_apiUrl}/{id}", zombie);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

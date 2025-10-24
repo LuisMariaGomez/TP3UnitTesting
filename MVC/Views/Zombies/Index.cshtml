@@ -1,9 +1,27 @@
 @model List<MVC.Models.DTOs.ZombieDTO>
 @{
     ViewData["Title"] = "Listado de Zombies";
+    ViewData["ShowHeader"] = true;
+    var showAll = (bool)(ViewData["ShowAll"] ?? false);
 }
+@section Styles {
+    <link rel="stylesheet" href="~/css/zombies.css" asp-append-version="true" />
+}
+
 <h2>Listado de Zombies</h2>
-<a asp-action="Create" class="btn btn-success mb-2">Nuevo Zombie</a>
+
+<div class="mb-2">
+    @if (!showAll)
+    {
+        <a asp-action="Index" asp-route-showAll="true" class="btn btn-outline-danger me-2">Mostrar eliminados</a>
+    }
+    else
+    {
+        <a asp-action="Index" asp-route-showAll="false" class="btn btn-secondary me-2">Ocultar eliminados</a>
+    }
+    <a asp-action="Create" class="btn btn-success">Nuevo Zombie</a>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -17,26 +35,49 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var z in Model)
+        @if (Model != null && Model.Any())
+        {
+            foreach (var z in Model)
+            {
+                <tr>
+                    <td>@z.Nombre</td>
+                    <td>@z.Edad</td>
+                    <td>@z.NivelPeligro</td>
+                    <td>@z.Tipo</td>
+                    <td>@z.Velocidad</td>
+                    <td>@z.Estado</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@z.Id" class="btn btn-info btn-sm">Ver</a>
+                        <a asp-action="Edit" asp-route-id="@z.Id" class="btn btn-warning btn-sm">Editar</a>
+
+                        @if (!string.Equals(z.Estado, "Eliminado", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <form asp-action="DeleteConfirmed" asp-route-id="@z.Id" method="post" style="display:inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('¿Seguro que deseas eliminar este zombie?');">
+                                    Eliminar
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-action="Revive" asp-route-id="@z.Id" method="post" style="display:inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-success btn-sm"
+                                        onclick="return confirm('¿Seguro que deseas reanimar este zombie?');">
+                                    Reanimar
+                                </button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
         {
             <tr>
-                <td>@z.Nombre</td>
-                <td>@z.Edad</td>
-                <td>@z.NivelPeligro</td>
-                <td>@z.Tipo</td>
-                <td>@z.Velocidad</td>
-                <td>@z.Estado</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@z.Id" class="btn btn-info btn-sm">Ver</a>
-                    <a asp-action="Edit" asp-route-id="@z.Id" class="btn btn-warning btn-sm">Editar</a>
-
-                    <form asp-action="DeleteConfirmed" asp-route-id="@z.Id" method="post" style="display:inline">
-                        <button type="submit" class="btn btn-danger btn-sm"
-                                onclick="return confirm('¿Seguro que deseas eliminar este zombie?');">
-                            Eliminar
-                        </button>
-                    </form>
-                </td>
+                <td colspan="7" class="text-center">No hay zombies para mostrar.</td>
             </tr>
         }
     </tbody>

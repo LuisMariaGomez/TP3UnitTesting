@@ -1,7 +1,13 @@
 @model MVC.Models.DTOs.ZombieDTO
 @{
     ViewData["Title"] = "Detalles del Zombie";
+    ViewData["ShowHeader"] = false;
+    }
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 }
+
 <h2>Detalles del Zombie</h2>
 <div>
     <dl class="row">

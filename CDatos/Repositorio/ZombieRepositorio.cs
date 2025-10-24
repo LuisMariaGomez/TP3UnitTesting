@@ -44,6 +44,18 @@ namespace CDatos.Repositorio
             zombieExistente.Edad = zombie.Edad;
             zombieExistente.Velocidad = zombie.Velocidad;
 
+            // Actualizar Estado si viene en el objeto (permite reanimar)
+            if (!string.IsNullOrWhiteSpace(zombie.Estado))
+            {
+                zombieExistente.Estado = zombie.Estado;
+            }
+
+            // Actualizar FechaInfeccion si el DTO trae una fecha válida (no default)
+            if (zombie.FechaInfeccion != default)
+            {
+                zombieExistente.FechaInfeccion = zombie.FechaInfeccion;
+            }
+
             _context.SaveChanges();
         }
         public void EliminarZombie(int id)
